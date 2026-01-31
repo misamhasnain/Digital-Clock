@@ -1,34 +1,59 @@
- const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-        const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+var months = ["January", "February", "March", "April", "May", "June",
+              "July", "August", "September", "October", "November", "December"];
 
-        function updateClock() {
-            const now = new Date();
+function updateClock() {
 
-            document.getElementById('day-name').innerText = days[now.getDay()];
-            document.getElementById('full-date').innerText = `${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()}`;
+    var dateObject = new Date();
 
-            let h = now.getHours();
-            let m = now.getMinutes();
-            let s = now.getSeconds();
-            let period = h >= 12 ? "PM" : "AM";
+    var day = dateObject.getDay();
+    var date = dateObject.getDate();
+    var month = dateObject.getMonth();
+    var year = dateObject.getFullYear();
 
-        
-            if (h == 0) {
-                h = 12;
-            } else if (h > 12) {
-                h = h - 12;
-            }
-            
-            if (h < 10) h = "0" + h;
-            if (m < 10) m = "0" + m;
-            if (s < 10) s = "0" + s;
+    document.getElementById("day-name").innerText = days[day];
+    document.getElementById("full-date").innerText =
+        date + " " + months[month] + " " + year;
 
 
-            document.getElementById('hours').innerText = h;
-            document.getElementById('min').innerText = m;
-            document.getElementById('sec').innerText = s;
-            document.getElementById('ampm').innerText = period;
-        }
+    var hours = dateObject.getHours();  
+    var minutes = dateObject.getMinutes();
+    var seconds = dateObject.getSeconds();
+    var ampm = "AM";
 
-        setInterval(updateClock, 1000);
-        updateClock(); 
+
+    if (hours >= 12) {
+        ampm = "PM";
+    }
+
+
+    if (hours == 0) {
+        hours = 12;
+    }
+    else if (hours > 12) {
+        hours = hours - 12;
+    }
+
+
+    if (hours < 10) {
+        hours = "0" + hours;
+    }
+
+    if (minutes < 10) {
+        minutes = "0" + minutes;
+    }
+
+    if (seconds < 10) {
+        seconds = "0" + seconds;
+    }
+
+
+    document.getElementById("hours").innerText = hours;
+    document.getElementById("min").innerText = minutes;
+    document.getElementById("sec").innerText = seconds;
+    document.getElementById("ampm").innerText = ampm;
+}
+
+
+setInterval(updateClock, 1000);
+updateClock();
